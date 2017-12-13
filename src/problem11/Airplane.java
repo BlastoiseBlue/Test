@@ -1,13 +1,31 @@
 package problem11;
-
+import java.util.Scanner;
 public class Airplane {
 	int r = 7;
 	int c = 4;
-
+	Scanner kbd=new Scanner(System.in);
 	// enum column {
 	// A, B, C, D
 	// };
-
+	public void schedule() {
+		this.output();
+		cnt:
+			while(this.seatsLeft()>0) {
+				System.out.println("Which seat do you want?");
+				int row=kbd.nextInt();
+				String clmn=kbd.next();
+				this.book(row-1, clmn);
+				this.output();
+				System.out.println("Continue? Y/N");
+				String response=kbd.next();
+				while(!response.equalsIgnoreCase("y")&&!response.equalsIgnoreCase("n")) {
+					System.out.println("Invalaid response, please try again");
+					System.out.println("Continue? Y/N");
+					response=kbd.next();
+				}
+				if(response.equalsIgnoreCase("n"))break cnt;
+			}System.exit(0);
+	}
 	char[][] seats = new char[r][c];
 	{
 		for (int i = 0; i < r; i++) {
